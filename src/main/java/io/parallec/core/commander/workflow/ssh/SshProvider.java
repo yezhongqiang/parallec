@@ -1,4 +1,4 @@
-/*  
+/*
 Copyright [2013-2015] eBay Software Foundation
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ import com.jcraft.jsch.Session;
  * based on Jsch. tested with real VM with Key/password cases. Run ssh. This is
  * a basic one that works with password. If needed we may replace this
  * SshProvider after defining an interface.
- * 
+ *
  * @author Yuanteng (Jeff) Pei
  *
  */
@@ -163,7 +163,7 @@ public class SshProvider {
             throws JSchException {
     	// set timeout
         session.connect(sshMeta.getSshConnectionTimeoutMillis());
-        
+
         ChannelExec channel = (ChannelExec) session.openChannel("exec");
         channel.setCommand(sshMeta.getCommandLine());
 
@@ -177,7 +177,7 @@ public class SshProvider {
                 channel.setExtOutputStream(System.err, true);
                 channel.setPty(true);
                 channel.connect();
-                
+
 	            out.write((sshMeta.getPassword()+"\n").getBytes());
 	            out.flush();
 			} catch (IOException e) {
@@ -265,7 +265,7 @@ public class SshProvider {
         logger.error("error in exec SSH. \nIf exection is JSchException: "
                 + "Auth cancel and using public key. "
                 + "\nMake sure 1. private key full path is right (try sshMeta.getPrivKeyAbsPath()). "
-                + "\n2. the user name and key matches  " + t);
+                + "\n2. the user name and key matches  " + t + "\n" + PcStringUtils.printStackTrace(t));
 
         return sshResponse;
     }
