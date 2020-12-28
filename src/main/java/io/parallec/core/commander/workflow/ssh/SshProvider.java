@@ -233,8 +233,11 @@ public class SshProvider {
                     sshResponse.setStatusCode(Integer.toString(exitStatus));
                     break;
                 }
-
-                Thread.sleep(ParallecGlobalConfig.sshSleepMIllisBtwReadBuffer);
+                try {
+                    Thread.sleep(ParallecGlobalConfig.sshSleepMIllisBtwReadBuffer);
+                } catch (InterruptedException swallowed) {
+                    //swallowed
+                }
             }
 
             sshResponse.setResponseBody(sbStdOut.toString());
